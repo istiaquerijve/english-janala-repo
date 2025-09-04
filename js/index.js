@@ -4,6 +4,26 @@ const loadLesson = () => {
     .then((json) => displayLesson(json.data)
     );
 };
+const loadLevelWord = (id) => {
+    const url = `https://openapi.programming-hero.com/api/level/${id}`;
+    fetch(url)
+    .then((res) => res.json())
+    .then((data) =>  displayLevelWord(data.data)
+    );
+}
+const displayLevelWord = (words) => {
+    const wordContainer = document.getElementById("word-container")
+    // wordContainer.innerHTML = "";
+    
+    words.forEach((word) => {
+        console.log(word);
+        const card = document.createElement("div");
+        card.innerHTML = `
+
+        `;
+        wordContainer.append(card);
+    })
+}
 
 const displayLesson = (lessons) => {
     
@@ -17,7 +37,7 @@ const displayLesson = (lessons) => {
         // create element 
         const btnDiv = document.createElement("div");
         btnDiv.innerHTML = `
-                  <button class="btn btn-outline btn-primary"><i class="fa-solid fa-book"></i>Lesson - ${lesson.level_no} </button>
+                  <button onclick = "loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book"></i>Lesson - ${lesson.level_no} </button>
         `;  
      
          // append 
